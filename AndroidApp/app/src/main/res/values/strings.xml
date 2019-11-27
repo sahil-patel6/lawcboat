@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LawcBoat</string>
+    <string name="title">Welcome To LawcBoat</string>
+    <string name="land_operations">Land Operations</string>
+    <string name="water_operations">Water Operations</string>
+    <string name="credits">Credits</string>
+</resources>
