@@ -3,6 +3,7 @@ package com.lawcboat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -26,9 +27,9 @@ public class Controls extends AppCompatActivity {
 
     ImageView backButton, forwardLeft, forwardRight, forward, backward, backwardLeft, backwardRight;
     RelativeLayout stop;
-    CardView conveyorBeltControls, vacuumControls;
+    CardView conveyorBeltControls, vacuumControls,engineControls,gatesControls;
     Animation animationForOnCreate, animationForOnClick;
-    SwitchButton conveyorBeltSwitch, vacuumSwitch;
+    SwitchButton conveyorBeltSwitch, vacuumSwitch,engineSwitch,gatesSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class Controls extends AppCompatActivity {
 
         conveyorBeltSwitch = findViewById(R.id.conveyor_belt_switch_button);
         vacuumSwitch = findViewById(R.id.vacuum_switch_button);
+        engineSwitch = findViewById(R.id.engine_switch_button);
+        gatesSwitch = findViewById(R.id.gates_switch_button);
 
         forward = findViewById(R.id.forward);
         forwardLeft = findViewById(R.id.forward_left);
@@ -51,8 +54,11 @@ public class Controls extends AppCompatActivity {
         backwardLeft = findViewById(R.id.backward_left);
         backwardRight = findViewById(R.id.backward_right);
         stop = findViewById(R.id.stop);
+
         conveyorBeltControls = findViewById(R.id.conveyorBeltControls);
         vacuumControls = findViewById(R.id.vacuumControls);
+        engineControls = findViewById(R.id.engineControls);
+        gatesControls = findViewById(R.id.gatesControls);
 
         forward.startAnimation(animationForOnCreate);
         forwardRight.startAnimation(animationForOnCreate);
@@ -66,6 +72,8 @@ public class Controls extends AppCompatActivity {
 
         conveyorBeltControls.startAnimation(animationForOnCreate);
         vacuumControls.startAnimation(animationForOnCreate);
+        engineControls.startAnimation(animationForOnCreate);
+        gatesControls.startAnimation(animationForOnCreate);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,12 +138,14 @@ public class Controls extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 conveyorBeltControls.startAnimation(animationForOnClick);
+                conveyorBeltSwitch.setChecked(!conveyorBeltSwitch.isChecked());
             }
         });
         vacuumControls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 vacuumControls.startAnimation(animationForOnClick);
+                vacuumSwitch.setChecked(!vacuumSwitch.isChecked());
             }
         });
 
@@ -164,10 +174,53 @@ public class Controls extends AppCompatActivity {
             }
         });
 
+        engineControls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                engineControls.startAnimation(animationForOnClick);
+                engineSwitch.setChecked(!engineSwitch.isChecked());
+            }
+        });
+
+        engineSwitch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                if (isChecked) {
+                    Log.d("Engine switch", "turned on");
+                } else {
+                    Log.d("Engine switch", "turned off");
+                }
+
+                checkIfDataSend(BTHandler.sendDataViaBluetooth("e"));
+            }
+        });
+
+        gatesControls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gatesControls.startAnimation(animationForOnClick);
+                gatesSwitch.setChecked(!gatesSwitch.isChecked());
+            }
+        });
+
+        gatesSwitch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                if (isChecked) {
+                    Log.d("Gates switch", "turned on");
+                } else {
+                    Log.d("Gates switch", "turned off");
+                }
+
+                checkIfDataSend(BTHandler.sendDataViaBluetooth("g"));
+            }
+        });
+
         connect();
     }
 
     static class connectToDevice extends AsyncTask<Void, Void, Boolean> {
+        @SuppressLint("StaticFieldLeak")
         Context context;
 
         connectToDevice(Context c) {

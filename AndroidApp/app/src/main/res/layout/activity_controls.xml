@@ -45,6 +45,44 @@
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/engineControls"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="20dp"
+            app:cardPreventCornerOverlap="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/engine_controls">
+
+                <TextView
+                    android:id="@+id/toggleEngine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="40dp"
+                    android:text="Engine"
+                    android:textColor="#fff"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <com.suke.widget.SwitchButton
+                    android:id="@+id/engine_switch_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="20dp" />
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -194,6 +232,45 @@
 
                 <com.suke.widget.SwitchButton
                     android:id="@+id/vacuum_switch_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="20dp" />
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/gatesControls"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="20dp"
+            app:cardPreventCornerOverlap="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/engine_controls">
+
+                <TextView
+                    android:id="@+id/toggleGates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="40dp"
+                    android:text="Gates"
+                    android:textColor="#fff"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <com.suke.widget.SwitchButton
+                    android:id="@+id/gates_switch_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
